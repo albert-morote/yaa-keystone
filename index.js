@@ -30,5 +30,5 @@ keystone.createList('Todo', {
 
 module.exports = {
   keystone,
-  apps: [new GraphQLApp(),new NextApp({dir:'app'}), new AdminUIApp({ enableDefaultRoute: true })],
+  apps: [new GraphQLApp(), new AdminUIApp({ enableDefaultRoute: true })],
 };
