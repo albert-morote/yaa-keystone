@@ -5,6 +5,7 @@ const {AdminUIApp} = require('@keystonejs/app-admin-ui');
 const {NextApp} = require('@keystonejs/app-next')
 const {Content} = require('@keystonejs/field-content');
 const Stars = require('./Stars')
+const MySelect = require('./MySelect')
 
 const {MongooseAdapter: Adapter} = require('@keystonejs/adapter-mongoose');
 
@@ -22,6 +23,7 @@ keystone.createList('Todo', {
         name: {type: Text, schemaDoc: 'This is the thing you need to do'},
         blip: {type: Text, schemaDoc: 'This is another thing'},
         status: {type: Select, options: 'pending, processed'},
+        mySelectField: {type: MySelect, options: 'pending, processed'},
         rating: { type: Stars, starCount: 5 }
 
         /* body: {
