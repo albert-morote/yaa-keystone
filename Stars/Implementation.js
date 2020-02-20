@@ -1,6 +1,6 @@
-const { Select } = require('@keystonejs/fields');
+const { Integer } = require('@keystonejs/fields');
 
-class Stars extends Select.implementation {
+class Stars extends Integer.implementation {
   extendAdminMeta(meta) {
     return { ...meta, starCount: this.config.starCount || 5 };
   }
@@ -8,6 +8,6 @@ class Stars extends Select.implementation {
 
 module.exports = {
   Stars,
-  MongoInterface: Select.adapters.mongoose,
-  KnexInterface: Select.adapters.knex,
+  MongoIntegerInterface: Integer.adapters.mongoose,
+  KnexIntegerInterface: Integer.adapters.knex,
 };

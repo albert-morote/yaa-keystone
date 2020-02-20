@@ -1,23 +1,23 @@
 const {
   Stars,
-  MongoInterface,
-  KnexInterface,
+  MongoIntegerInterface,
+  KnexIntegerInterface,
 } = require('./Implementation')
 
 // We're going to extend the integer field to store a number between 1-5 and represent this as a rating
-const { Select } = require('@keystonejs/fields')
+const { Integer } = require('@keystonejs/fields')
 
 module.exports = {
   type: 'Stars',
   implementation: Stars,
   views: {
-    Controller: Select.views.Controller,
-    Field:  Select.views.Field,
-    Filter: Select.views.Filter,
-    Cell:Select.views.Cell,
+    Controller: Integer.views.Controller,
+    Field: require.resolve('./views/Field'),
+    Filter: Integer.views.Filter,
+    Cell: require.resolve('./views/Cell'),
   },
   adapters: {
-    mongoose: MongoInterface,
-    knex: KnexInterface,
+    mongoose: MongoIntegerInterface,
+    knex: KnexIntegerInterface,
   },
 }
