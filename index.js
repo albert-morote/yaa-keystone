@@ -23,14 +23,15 @@ keystone.createList('Article', {
     schemaDoc: 'Published Articles',
     fields: {
         title: {type: Text, schemaDoc: 'Title for published article'},
-        status: {type: Select, options: 'Visible,Hidden'},
+        status: {type: Select, options: 'Visible,Hidden', defaultValue:'Hidden'},
         text: {type: Wysiwyg},
         proposal: {
+            isUnique:true,
             type: Relationship,
             ref: 'Proposal',
               access: {
                   create: true,
-                  read: true,
+                  read: false,
                   update: false,
               },
         },
@@ -44,7 +45,7 @@ keystone.createList('Proposal', {
         title: {type: Text, schemaDoc: 'Title for submitted article'},
         text: {type: Wysiwyg},
 
-        status: {type: Select, options: ['Pending','Approved']},
+        status: {type: Select, options: ['Pending','Approved'], defaultValue:'Pending'},
 
     },
     hooks: {
