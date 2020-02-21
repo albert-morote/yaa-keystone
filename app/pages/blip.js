@@ -1,7 +1,6 @@
 import React from 'react'
 
-
 export default  () => {
 
-    return (<p>blip</p>)
+    return (<div>hi there</div>)
 }

@@ -5,6 +5,7 @@ const {AdminUIApp} = require('@keystonejs/app-admin-ui');
 const {NextApp} = require('@keystonejs/app-next')
 const {Content} = require('@keystonejs/field-content');
 const Stars = require('./Stars')
+const {Wysiwyg} = require('@keystonejs/fields-wysiwyg-tinymce');
 
 const {MongooseAdapter: Adapter} = require('@keystonejs/adapter-mongoose');
 
@@ -16,32 +17,40 @@ const keystone = new Keystone({
     adapter: new Adapter(),
 });
 
-keystone.createList('Todo', {
-    schemaDoc: 'A list of things which need to be done',
-    fields: {
-        name: {type: Text, schemaDoc: 'This is the thing you need to do'},
-        blip: {type: Text, schemaDoc: 'This is another thing'},
-        status: {type: Select, options: 'pending, processed'},
-        rating: { type: Stars, starCount: 5 }
 
-        /* body: {
-            type: Content,
-            blocks: [
-                Content.blocks.blockquote,
-                Content.blocks.image,
-                Content.blocks.link,
-                Content.blocks.orderedList,
-                Content.blocks.unorderedList,
-                Content.blocks.heading,
-                // CloudinaryImage.blocks.image,
-            ],
-        },*/
+
+keystone.createList('Article', {
+    schemaDoc: 'Published Articles',
+    fields: {
+        title: {type: Text, schemaDoc: 'Title for published article'},
+        status: {type: Select, options: 'Visible,Hidden'},
+        text: {type: Wysiwyg}
+    },
+    proposal: {
+        type: String,
+        access: {
+            create: false,
+            read: true,
+            update: false,
+        },
+    },
+})
+
+keystone.createList('Proposal', {
+    schemaDoc: 'Proposed Content',
+    fields: {
+        title: {type: Text, schemaDoc: 'Title for submitted article'},
+        text: {type: Wysiwyg},
+
+        status: {type: Select, options: ['Pending','Approved']}
     },
     hooks: {
         // Hooks for create and update operations
         resolveInput: async (params) => {
-            console.log("params")
-            console.log(params)
+           /* console.log("params")
+            console.log(params)*/
+            const data = await keystone.lists.Article.adapter.create({title:"fromOutside",text:"Myfriend"})
+            console.log(data)
             return params.resolvedData
         }
     }
@@ -52,6 +61,6 @@ module.exports = {
     apps: [
         new GraphQLApp(),
         new AdminUIApp({enableDefaultRoute: true}),
-        new NextApp({dir: 'app'})
+         new NextApp({dir: 'app'})
     ],
 };
