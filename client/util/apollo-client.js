@@ -19,9 +19,10 @@ const link = createHttpLink({
 export default withApollo(
     // You can get headers and ctx (context) from the callback params
     // e.g. ({ headers, ctx, initialState })
-    ({ initialState }) =>
+    ({ ctx, initialState }) =>
         new ApolloClient({
             link: link,
+            ssrMode:!!ctx,
             cache: new InMemoryCache()
                 //  rehydrate the cache using the initial data passed from the server:
                 .restore(initialState || {}),
