@@ -1,4 +1,4 @@
-import FieldController from '../../node_modules/@keystonejs/fields/Controller';
+import FieldController from '@keystonejs/fields/Controller';
 
 export default class SelectController extends FieldController {
   constructor(config, ...args) {

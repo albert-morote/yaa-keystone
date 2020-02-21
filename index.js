@@ -61,6 +61,6 @@ module.exports = {
     apps: [
         new GraphQLApp(),
         new AdminUIApp({enableDefaultRoute: true}),
-         new NextApp({dir: 'app'})
+         new NextApp({dir: 'client'})
     ],
 };
