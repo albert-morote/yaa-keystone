@@ -6,7 +6,6 @@ const query = `query {
 
 
 export default  async () => {
-
     try {
        const res = await axios({
             url: 'http://localhost:3000/admin/api',
@@ -17,14 +16,12 @@ export default  async () => {
             headers: {
                 'Content-Type': 'application/json'
             }
-
         })
         return res?.data?.data?.allTodos?.map(todo => ({label:todo.name,value:todo.name}))
 
     } catch (error) {
-        console.log(`error ${error.toString()}`)
+        console.log(`fetch error ${error.toString()}`)
     }
-
 }
 
 

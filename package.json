@@ -32,6 +32,7 @@
     "@keystonejs/fields-wysiwyg-tinymce": "^5.1.0",
     "@keystonejs/file-adapters": "^5.5.0",
     "@keystonejs/keystone": "^5.5.0",
+    "@keystonejs/list-plugins": "^5.1.0",
     "@keystonejs/oembed-adapters": "^5.1.0",
     "apollo-boost": "^0.4.7",
     "apollo-client": "^2.6.8",

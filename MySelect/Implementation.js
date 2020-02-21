@@ -4,6 +4,7 @@ const {KnexFieldAdapter} = require('@keystonejs/adapter-knex');
 const { Select } = require('@keystonejs/fields');
 
 function initOptions(options) {
+    console.log('initOptions ', options)
     let optionsArray = options;
     if (typeof options === 'string') optionsArray = options.split(/\,\s*/);
     if (!Array.isArray(optionsArray)) return null;

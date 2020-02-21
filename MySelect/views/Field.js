@@ -19,7 +19,8 @@ class SelectField extends Component {
 
     async componentDidMount() {
         const data = await dataFetch()
-        console.log(data)
+        // valid value
+        data.push({label: "pending todo", value: "pending"})
         this.setState({options:data})
     }
 
