@@ -1,5 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import Nav from "../components/Nav"
+import Nav from "../components/Navbar"
 
 class MyDocument extends Document {
     static async getInitialProps(ctx) {
@@ -10,7 +10,9 @@ class MyDocument extends Document {
     render() {
         return (
             <Html>
-                <Head />
+                <Head>
+                    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&display=swap" rel="stylesheet"/>
+                </Head>
                 <body>
                 <Nav/>
                 <br/>

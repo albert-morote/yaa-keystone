@@ -5,6 +5,9 @@ const {AdminUIApp} = require('@keystonejs/app-admin-ui');
 const {NextApp} = require('@keystonejs/app-next')
 const { LocalFileAdapter } = require('@keystonejs/file-adapters');
 const { StaticApp } = require('@keystonejs/app-static');
+const { OEmbed } = require('@keystonejs/fields');
+const { IframelyOEmbedAdapter } = require('@keystonejs/oembed-adapters');
+const { MongooseAdapter } = require('@keystonejs/adapter-mongoose');
 
 const {Content} = require('@keystonejs/field-content');
 const Stars = require('./Stars')
@@ -17,6 +20,11 @@ const PROJECT_NAME = "yaa keystone";
 const staticPath = 'client/public';
 const staticRoute = '';
 
+const iframelyAdapter = new IframelyOEmbedAdapter({
+    apiKey: '4fdabd9de9cc2032652043'
+});
+
+
 const imageFileAdapter = new LocalFileAdapter({
     src: `${staticPath}/images`,
     path: `${staticRoute}/images`,
@@ -24,7 +32,7 @@ const imageFileAdapter = new LocalFileAdapter({
 
 const keystone = new Keystone({
     name: PROJECT_NAME,
-    adapter: new Adapter(),
+    adapter: new MongooseAdapter({dbName:'keystone-db'}),
 });
 
 
@@ -35,8 +43,9 @@ keystone.createList('Article', {
         status: {type: Select, options: 'Visible,Hidden', defaultValue: 'Hidden'},
         text: {type: Wysiwyg},
         images: {type:Relationship,ref:'Image',many:true},
+        video: { type: OEmbed, adapter: iframelyAdapter },
         proposal: {
-            isUnique: true,
+            isUnique: false,
             type: Relationship,
             ref: 'Proposal',
             access: {

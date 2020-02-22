@@ -1,9 +1,5 @@
 import React from 'react';
-import Head from 'next/head';
-import {useQuery} from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import apollo from "next-with-apollo/lib/apollo"
-import Nav from "../../components/Nav"
 import Link from "next/link"
 
 const ARTICLES_QUERY = gql`
@@ -27,7 +23,7 @@ const Index = (props) => {
         <div>
 
             <h1>Articles</h1>
-            <ul>
+            <ul className='posts'>
 
 
 

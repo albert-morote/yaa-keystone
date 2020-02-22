@@ -3,11 +3,16 @@ import gql from "graphql-tag"
 
 
 const ARTICLE_QUERY = gql`
- query Article ($id:ID!) {
+query Article ($id:ID!) {
   
    Article(where: {id:$id}) {
       title
       text
+      video {
+       ... on OEmbedVideo {
+        html
+        }
+      }
       images {
         file {
           filename
@@ -17,12 +22,15 @@ const ARTICLE_QUERY = gql`
   }
 `;
 
+
 const Post = props => {
 
     const {data} = props
-    console.log("data")
     const article = data?.data?.Article
+    console.log("article")
+    console.log(article)
 
+    const embed = article?.video?.html && {__html: article.video.html}
     return (
         <div >
             <h1>Article</h1>
@@ -30,8 +38,8 @@ const Post = props => {
 
             <h1>{article?.title}</h1>
             <h3>{article?.text}</h3>
-            <div id="commento"></div>
             {article?.images.map(image=> <img src={`/images/${image.file.filename}`}/>)}
+            {embed && <div dangerouslySetInnerHTML={embed}></div>}
         </div>
     );
 };

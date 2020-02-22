@@ -1,9 +1,11 @@
-import styles from './Button.module.css'
 import React from 'react'
 import Link from "next/link"
 
 export default () => {
-    return     <div className={styles.red}>
+
+
+        return  <>
+
         <ul className='menu'>
 
         <li><Link><a href='/index'>Home</a></Link></li>
@@ -11,5 +13,5 @@ export default () => {
     <li><Link><a href='/sendForm'>Add Article</a></Link></li>
     <li><a href='http://localhost:3000/admin'>Admin</a></li>
     </ul>
-</div>
+    </>
 }
