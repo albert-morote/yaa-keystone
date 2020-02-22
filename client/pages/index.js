@@ -3,7 +3,6 @@ import Head from 'next/head';
 import {useQuery} from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import apollo from "next-with-apollo/lib/apollo"
-
 const ARTICLES_QUERY = gql`
   query {
   
@@ -19,24 +18,10 @@ const Home = (props) => {
     const {data} = props
     const articles = data?.data?.allArticles
 
-    console.log(articles)
-    /*
-    const {data, loading, error} =  useQuery(ARTICLES_QUERY);
-*/
-    /*
-        if (loading) {
-            return <p>Loading...</p>;
-        }
 
-        if (error) {
-            return <p>Error: {JSON.stringify(error)}</p>;
-        }*/
     return (
         <div>
-            <Head>
-                <title>Home</title>
-                <link rel="icon" href="/favicon.ico"/>
-            </Head>
+
             <p>some paragraph stext</p>
             <div>And something in a div</div>
             <ul>

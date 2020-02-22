@@ -26,7 +26,6 @@ const Home = () => {
     // Create a query hook
     const {data, loading, error} = useQuery(ARTICLES_QUERY);
 
-/*
     const onError = err => console.log('error', err)
     const onCompleted = (x) => console.log('completed', x)
 
@@ -41,8 +40,7 @@ const Home = () => {
         await  addProposal({variables: {title, text}});
         setText('')
         setTitle('')
-    }*/
-    console.log(data)
+    }
     if (loading) {
         return <p>Loading...</p>;
     }
@@ -53,12 +51,9 @@ const Home = () => {
     return (
 
         <div>
-            <Head>
-                <title>Home</title>
-                <link rel="icon" href="/favicon.ico"/>
-            </Head>
+
             <p>This is some text for you</p>
-       {/*     <form onSubmit={event => handleSubmit(event)}>
+            <form onSubmit={event => handleSubmit(event)}>
                 <label>
                     Title
                     <input type='text' name='title' value={title} onChange={(event) => setTitle(event.target.value)}/>
@@ -68,7 +63,7 @@ const Home = () => {
                     <input type='text' name='name' value={text} onChange={(event) => setText(event.target.value)}/>
                 </label>
                 <input type='submit' value='Submit'/>
-            </form>*/}
+            </form>
             <ul>
                 {data?.allArticles?.map(article => {
                     return <li key={`article__${article.title}`}>{article.title}</li>;

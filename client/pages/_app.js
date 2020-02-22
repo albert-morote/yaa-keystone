@@ -4,9 +4,14 @@ import {ApolloProvider} from '@apollo/react-hooks';
 
 import withApollo from '../util/apollo-client';
 
+import '../styles/main.css'
 
-function MyApp({Component, pageProps}) {
-    return <Component {...pageProps} />
+function MyApp({Component, pageProps, apollo}) {
+    return <ApolloProvider client={apollo}>
+
+        <Component {...pageProps} />
+    </ApolloProvider>
+
 }
 
 /*
@@ -21,7 +26,8 @@ MyApp.getInitialProps = async (appContext) => {
     // calls page's `getInitialProps` and fills `appProps.pageProps`
     const appProps = await App.getInitialProps(appContext);
 
-    return { ...appProps }
+    return {...appProps}
 }
 
 export default withApollo(MyApp)
+
