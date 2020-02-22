@@ -3,18 +3,21 @@ import Head from 'next/head';
 import {useQuery} from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import apollo from "next-with-apollo/lib/apollo"
-import Nav from "../components/Nav"
+import Nav from "../../components/Nav"
+import Link from "next/link"
+
 const ARTICLES_QUERY = gql`
   query {
   
    allArticles {
       title
       text
+      id
   }
   }
 `;
 
-const Posts = (props) => {
+const Index = (props) => {
     // Create a query hook
     const {data} = props
     const articles = data?.data?.allArticles
@@ -23,25 +26,34 @@ const Posts = (props) => {
     return (
         <div>
 
-            <p>some paragraph stext</p>
-            <div>And something in a div</div>
+            <h1>Articles</h1>
             <ul>
-                {articles?.map(article => {
-                    return <li key={`article__${article.title}`}>{article.title}</li>;
-                })}
+
+
+
+                    {articles?.map(article => {
+                        console.log(article)
+                    return    <Link key={article.id} href="/posts/[id]" as={`/posts/${article.id}`}>
+                            <li >
+                                <span className={'postTitle'}>{article.title}</span>
+
+                            </li>
+                        </Link>
+                    })}
+
             </ul>
+
         </div>
     );
 };
 
 
-Posts.getInitialProps = async ctx => {
+Index.getInitialProps = async ctx => {
 
     console.log('page gip')
     const apolloClient = ctx.apolloClient;
-    // console.log('client', apolloClient)
     try {
-        const data = await apolloClient.query({query:ARTICLES_QUERY})
+        const data = await apolloClient.query({query: ARTICLES_QUERY})
         console.log('data')
         console.log(data)
         return {data}
@@ -50,4 +62,4 @@ Posts.getInitialProps = async ctx => {
         return {data: {}}
     }
 }
-export default Posts;
+export default Index;
