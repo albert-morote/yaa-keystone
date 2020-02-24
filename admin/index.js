@@ -1,25 +1,28 @@
-import Static1 from './pages/static-1';
+import Dashboard from './pages/dashboard';
+import About from './pages/about';
 
 export default {
-    pages: () => [
-        {
-            label: 'Main static page 1',
-            path: 'static-1',
-            component: Static1,
-        },
-        {
-            label: 'Dynamic pages',
-            children: ['Todo', 'ListWithPlugin'],
-        },
-        {
-            label: 'Static pages',
-
-            children: [{
-                label: 'Static page 1',
-                path: 'static-1',
-                listKey: 'Post',
-                component: Static1,
-            }],
-        },
-    ],
+  pages: () => [
+   {
+      label: 'A new dashboard',
+      path: '',
+      component: Dashboard,
+    },
+    {
+      label: 'About this project',
+      path: '/about',
+      component: About,
+    },
+    {
+      label: 'Blog',
+      children: [
+        { listKey: 'Article' },
+        { label: 'Categories', listKey: 'Proposal' },
+      ],
+    },
+    {
+      label: 'People',
+      children: ['User'],
+    },
+  ],
 };

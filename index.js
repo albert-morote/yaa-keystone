@@ -19,7 +19,7 @@ const emptyObj = require('./util/emptyObject')
 
 const PROJECT_NAME = "yaa keystone";
 
-const staticPath = 'client/public';
+const staticPath = 'app/public';
 const staticRoute = '';
 
 const iframelyAdapter = new IframelyOEmbedAdapter({
@@ -49,6 +49,8 @@ const authStrategy = keystone.createAuthStrategy({
 
 
 keystone.createList('User', {
+    labelField: 'username',
+
     access: {
         // 1. Only admins can read deactivated user accounts
         read: ({authentication: {item}}) => {
@@ -114,8 +116,8 @@ keystone.createList('YouTube', {
 
 keystone.createList('Article', {
     schemaDoc: 'Published Articles',
+    labelField: 'title',
     access: {
-        // 1. Only admins can read deactivated user accounts
 
         create: ({authentication}) => (!emptyObj(authentication) && authentication.item && authentication.item.isAdmin),
         update: ({authentication}) => !emptyObj(authentication) && authentication.item && authentication.item.isAdmin,
@@ -124,7 +126,10 @@ keystone.createList('Article', {
     fields: {
         title: {type: Text, schemaDoc: 'Title for published article'},
         status: {type: Select, options: 'Visible,Hidden', defaultValue: 'Hidden'},
+        language: {type:Select, options: 'English,Deutsch,Francais', defaultValue: 'English'},
+        translations: {type: Relationship, ref: 'Article', many: true},
         text: {type: Wysiwyg},
+
         images: {type: Relationship, ref: 'Image', many: true},
         video: {type: Relationship, ref: 'YouTube', many: true},
         proposal: {
@@ -143,6 +148,8 @@ keystone.createList('Article', {
 
 keystone.createList('Proposal', {
     schemaDoc: 'Proposed Content',
+    labelField: 'title',
+
     fields: {
         title: {type: Text, schemaDoc: 'Title for submitted article'},
         text: {type: Wysiwyg},
@@ -190,12 +197,17 @@ module.exports = {
     keystone,
     apps: [
         new GraphQLApp(),
-        new AdminUIApp({authStrategy, enableDefaultRoute: true}),
-        new NextApp({dir: 'client'}),
-        new StaticApp({
-            path: '/',
-            src: 'static_files',
-            fallback: 'index.html',
+        new AdminUIApp({
+            adminPath: '/admin',
+            hooks: require.resolve('./admin/'),
+            authStrategy,
+            enableDefaultRoute: true
         }),
+        new NextApp({dir: 'app'}),
+        /*  new StaticApp({
+              path: '/',
+              src: 'static_files',
+              fallback: 'index.html',
+          }),*/
     ],
 };
