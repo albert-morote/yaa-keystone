@@ -103,6 +103,14 @@ keystone.createList('User', {
     }
 });
 
+keystone.createList('YouTube', {
+    schemaDoc: 'YouTube embeds',
+    fields: {
+        youtube: {type: OEmbed, adapter: iframelyAdapter},
+    }
+
+})
+
 
 keystone.createList('Article', {
     schemaDoc: 'Published Articles',
@@ -110,7 +118,6 @@ keystone.createList('Article', {
         // 1. Only admins can read deactivated user accounts
 
         create: ({authentication}) => (!emptyObj(authentication) && authentication.item && authentication.item.isAdmin),
-
         update: ({authentication}) => !emptyObj(authentication) && authentication.item && authentication.item.isAdmin,
         delete: ({authentication}) => !emptyObj(authentication) && authentication.item && authentication.item.isAdmin
     },
@@ -119,7 +126,7 @@ keystone.createList('Article', {
         status: {type: Select, options: 'Visible,Hidden', defaultValue: 'Hidden'},
         text: {type: Wysiwyg},
         images: {type: Relationship, ref: 'Image', many: true},
-        video: {type: OEmbed, adapter: iframelyAdapter},
+        video: {type: Relationship, ref: 'YouTube', many: true},
         proposal: {
             isUnique: false,
             type: Relationship,
