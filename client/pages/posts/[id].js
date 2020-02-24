@@ -1,7 +1,6 @@
 import React from 'react';
 import gql from "graphql-tag"
-
-
+import useScript from '../../hooks/useScript'
 const ARTICLE_QUERY = gql`
 query Article ($id:ID!) {
   
@@ -24,6 +23,7 @@ query Article ($id:ID!) {
 
 
 const Post = props => {
+    useScript('https://cdn.commento.io/js/commento.js');
 
     const {data} = props
     const article = data?.data?.Article
@@ -32,15 +32,18 @@ const Post = props => {
 
     const embed = article?.video?.html && {__html: article.video.html}
     return (
-        <div >
-            <h1>Article</h1>
+        <>
+            <div>
+                <h1>Article</h1>
 
 
-            <h1>{article?.title}</h1>
-            <h3>{article?.text}</h3>
-            {article?.images.map(image=> <img src={`/images/${image.file.filename}`}/>)}
-            {embed && <div dangerouslySetInnerHTML={embed}></div>}
-        </div>
+                <h1>{article?.title}</h1>
+                <h3>{article?.text}</h3>
+                {article?.images.map(image => <img src={`/images/${image.file.filename}`}/>)}
+                {embed && <div dangerouslySetInnerHTML={embed}></div>}
+            </div>
+            <div id="commento"></div>
+        </>
     );
 };
 
@@ -52,8 +55,8 @@ Post.getInitialProps = async ctx => {
         console.log('query')
         console.log(ctx.query)
         const {id} = ctx.query
-        console.log('id',id)
-        const data = await apolloClient.query({query: ARTICLE_QUERY, variables:{id}})
+        console.log('id', id)
+        const data = await apolloClient.query({query: ARTICLE_QUERY, variables: {id}})
         console.log('data')
         console.log(data)
         return {data}

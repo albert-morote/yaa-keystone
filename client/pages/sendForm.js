@@ -3,15 +3,6 @@ import Head from 'next/head';
 import {useMutation, useQuery} from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
-const ARTICLES_QUERY = gql`
-  query {
-  
-   allArticles {
-      title
-      text
-  }
-  }
-`;
 const ADD_PROPOSAL = gql`
   mutation CreateProposal($title:String,$text:String) {
     createProposal(data:{title:$title,text:$text}) {
@@ -24,7 +15,6 @@ const ADD_PROPOSAL = gql`
 
 const Home = () => {
     // Create a query hook
-    const {data, loading, error} = useQuery(ARTICLES_QUERY);
 
     const onError = err => console.log('error', err)
     const onCompleted = (x) => console.log('completed', x)
@@ -32,6 +22,7 @@ const Home = () => {
     const [addProposal, {data2}] = useMutation(ADD_PROPOSAL, {onError, onCompleted});
 
     const [title, setTitle] = useState('')
+
     const [text, setText] = useState('')
 
     const handleSubmit =async event => {
@@ -41,13 +32,9 @@ const Home = () => {
         setText('')
         setTitle('')
     }
-    if (loading) {
-        return <p>Loading...</p>;
-    }
 
-    if (error) {
-        return <p>Error: {JSON.stringify(error)}</p>;
-    }
+
+
     return (
 
         <div>
@@ -64,11 +51,7 @@ const Home = () => {
                 </label>
                 <input type='submit' value='Submit'/>
             </form>
-            <ul>
-                {data?.allArticles?.map(article => {
-                    return <li key={`article__${article.title}`}>{article.title}</li>;
-                })}
-            </ul>
+
         </div>
     );
 };
