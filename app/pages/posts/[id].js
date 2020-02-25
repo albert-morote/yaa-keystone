@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import gql from "graphql-tag"
 
+import useScript from "../../hooks/useScript"
 
 const ARTICLE_QUERY = gql`
  query Article ($id:ID!) {
@@ -26,7 +27,7 @@ const ARTICLE_QUERY = gql`
 
 
 const Post = props => {
-
+    useScript('https://cdn.commento.io/js/commento.js')
     const {data} = props
     const article = data?.data?.Article
     console.log("article")
@@ -40,6 +41,7 @@ const Post = props => {
 
             <h1>{article?.title}</h1>
             {(article?.text) && <div dangerouslySetInnerHTML={{__html: article.text}}></div>}
+            <div id="commento"></div>
             {article?.images.map(image => <img src={`/images/${image.file.filename}`}/>)}
             {embeds && embeds.map(embed =>
                 (embed?.youtube?.html) && <div className='article_embed' dangerouslySetInnerHTML={{__html: embed.youtube.html}}></div>
