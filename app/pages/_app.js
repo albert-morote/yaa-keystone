@@ -3,7 +3,7 @@ import App from 'next/app';
 import {ApolloProvider} from '@apollo/react-hooks';
 
 import withApollo from '../util/apollo-client';
-// import 'normalize.css'
+ import 'normalize-scss'
 import '../styles/main.scss'
 
 function MyApp({Component, pageProps, apollo}) {

@@ -126,7 +126,7 @@ keystone.createList('Article', {
     fields: {
         title: {type: Text, schemaDoc: 'Title for published article'},
         status: {type: Select, options: 'Visible,Hidden', defaultValue: 'Hidden'},
-        language: {type:Select, options: 'English,Deutsch,Francais', defaultValue: 'English'},
+        language: {type:Select, options: ['English','Francais', 'Deutsch'], defaultValue: 'English'},
         translations: {type: Relationship, ref: 'Article', many: true},
         text: {type: Wysiwyg},
 
