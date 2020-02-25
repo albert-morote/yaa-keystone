@@ -6,10 +6,11 @@ const query = `query {
 
 
 export default  async () => {
+    const port = process.env.REACT_APP_PORT;
 
     try {
        const res = await axios({
-            url: 'http://localhost:3000/admin/api',
+            url: `http://localhost:${port}/admin/api`,
             method: 'post',
             data: {
                 query

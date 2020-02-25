@@ -21,7 +21,7 @@ const Index = (props) => {
 
 
     return (
-        <div>
+        <div className='articles_main'>
 
             <h1>Articles</h1>
             <ul className='posts'>

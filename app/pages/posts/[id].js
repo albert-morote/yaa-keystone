@@ -37,7 +37,7 @@ const Post = props => {
     return (
         <div className='article_main'>
             <h1>Article</h1>
-
+<div className='article_content'>
 
             <h1>{article?.title}</h1>
             {(article?.text) && <div dangerouslySetInnerHTML={{__html: article.text}}></div>}
@@ -46,6 +46,7 @@ const Post = props => {
             {embeds && embeds.map(embed =>
                 (embed?.youtube?.html) && <div className='article_embed' dangerouslySetInnerHTML={{__html: embed.youtube.html}}></div>
             )}
+</div>
         </div>
     );
 };
