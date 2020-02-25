@@ -119,6 +119,20 @@ keystone.createList('YouTube', {
 })
 
 
+keystone.createList('Podcast', {
+    schemaDoc: 'Podcast embeds',
+    labelResolver: item => {
+        console.log(item)
+        return item.spotify.title
+    },
+
+    fields: {
+        spotify: {type: OEmbed, adapter: iframelyAdapter},
+    }
+
+})
+
+
 keystone.createList('Article', {
     schemaDoc: 'Published Articles',
     labelField: 'title',
@@ -137,6 +151,7 @@ keystone.createList('Article', {
 
         images: {type: Relationship, ref: 'Image', many: true},
         video: {type: Relationship, ref: 'YouTube', many: true},
+        podcast: {type: Relationship, ref: 'Podcast', many: true},
         proposal: {
             isUnique: false,
             type: Relationship,

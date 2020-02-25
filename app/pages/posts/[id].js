@@ -16,6 +16,13 @@ const ARTICLE_QUERY = gql`
         }
       }
     }
+    podcast {
+      youtube {
+        ... on OEmbedRich {
+          html
+        }
+      }
+    }
       images {
         file {
           filename
@@ -33,7 +40,8 @@ const Post = props => {
     console.log("article")
     console.log(article)
 
-    const embeds = article?.video
+    const videos = article?.video
+   // const podcasts = article?.podcast
     return (
         <div className='article_main'>
             <h1>Article</h1>
@@ -43,9 +51,12 @@ const Post = props => {
             {(article?.text) && <div dangerouslySetInnerHTML={{__html: article.text}}></div>}
             <div id="commento"></div>
             {article?.images.map(image => <img src={`/images/${image.file.filename}`}/>)}
-            {embeds && embeds.map(embed =>
-                (embed?.youtube?.html) && <div className='article_embed' dangerouslySetInnerHTML={{__html: embed.youtube.html}}></div>
+            {videos && videos.map(podcast =>
+                (podcast?.spotify?.html) && <div className='article_embed' dangerouslySetInnerHTML={{__html: podcast.spotify.html}}></div>
             )}
+          {/*  {podcasts && podcasts.map(video =>
+                (video?.youtube?.html) && <div className='article_embed' dangerouslySetInnerHTML={{__html: video.youtube.html}}></div>
+            )}*/}
 </div>
         </div>
     );

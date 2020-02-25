@@ -146,7 +146,11 @@ temp/
 
 # User-specific stuff
 _deprecated
+.deprecated/*
+.idea/keystone-blank.iml
 .idea
+.idea/*
+.idea/**
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
