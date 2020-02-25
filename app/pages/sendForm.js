@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Editor} from '@tinymce/tinymce-react';
 import {useMutation, useQuery} from '@apollo/react-hooks';
 import gql from 'graphql-tag';
+import {useRouter} from "next/router"
 
 const ADD_PROPOSAL = gql`
   mutation CreateProposal($title:String,$text:String) {
@@ -25,6 +26,8 @@ const Home = () => {
 
     const [text, setText] = useState('')
 
+    const router = useRouter();
+
     const handleEditorChange = (content) => {
         setText(content)
     }
@@ -34,6 +37,7 @@ const Home = () => {
         await  addProposal({variables: {title, text}});
         setText('')
         setTitle('')
+        router.push('/proposalSent')
     }
 
 
@@ -41,6 +45,7 @@ const Home = () => {
     return (
 
         <div className='proposal_main'>
+            <h1>Suggest An Article</h1>
 
             <p>Aliquam accumsan bibendum tempor. Sed semper efficitur pretium. Ut in risus ac nisl convallis lobortis. Aliquam at bibendum libero, a posuere sapien. Donec porttitor leo sed purus placerat mollis. Cras tellus turpis, porttitor a nunc quis, ultricies dignissim justo. Cras rutrum at tortor nec porta. Maecenas auctor neque luctus accumsan vestibulum. In urna augue, ornare interdum ullamcorper sagittis, congue a tortor. Suspendisse semper, eros a cursus blandit, eros velit malesuada urna, eget ornare felis velit ac eros. Aenean eu eros quam. Etiam quis placerat lorem, euismod porta neque. Praesent eleifend lorem sed turpis lobortis, non interdum ligula congue. Pellentesque et sem id nisi facilisis consectetur. Phasellus fermentum sem mauris, at egestas nulla facilisis vel. Nullam ultricies suscipit arcu ac posuere. </p>
             <form onSubmit={event => handleSubmit(event)}>

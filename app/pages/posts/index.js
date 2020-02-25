@@ -9,6 +9,7 @@ const ARTICLES_QUERY = gql`
       title
       text
       id
+      status
   }
   }
 `;
@@ -16,7 +17,7 @@ const ARTICLES_QUERY = gql`
 const Index = (props) => {
     // Create a query hook
     const {data} = props
-    const articles = data?.data?.allArticles
+    const articles = data?.data?.allArticles?.filter(article => article.status === 'Visible')
 
 
     return (

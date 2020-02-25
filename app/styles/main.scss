@@ -8,6 +8,20 @@ html    {
   color:goldenrod;
   font-family: 'Roboto',sans-serif ;
 }
+
+.article_main {
+  max-width:80%;
+  position:relative;
+  img {
+  max-width:50%;
+    margin:5px;
+}
+.article_embed {
+  max-width:40%;
+  margin:5px;
+}
+}
+
 .proposal_main {
   max-width:80%;
  label {

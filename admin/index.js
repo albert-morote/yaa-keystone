@@ -3,11 +3,11 @@ import About from './pages/about';
 
 export default {
   pages: () => [
-   {
+/*   {
       label: 'A new dashboard',
       path: '',
       component: Dashboard,
-    },
+    },*/
     {
       label: 'About this project',
       path: '/about',
@@ -17,7 +17,9 @@ export default {
       label: 'Blog',
       children: [
         { listKey: 'Article' },
-        { label: 'Categories', listKey: 'Proposal' },
+        { label: 'Proposed Articles', listKey: 'Proposal' },
+        { label: 'Images', listKey: 'Image' },
+        { label: 'YouTube Videos', listKey: 'YouTube' },
       ],
     },
     {

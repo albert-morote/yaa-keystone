@@ -107,6 +107,11 @@ keystone.createList('User', {
 
 keystone.createList('YouTube', {
     schemaDoc: 'YouTube embeds',
+    labelResolver: item => {
+        console.log(item)
+        return item.youtube.title
+    },
+
     fields: {
         youtube: {type: OEmbed, adapter: iframelyAdapter},
     }
@@ -126,7 +131,7 @@ keystone.createList('Article', {
     fields: {
         title: {type: Text, schemaDoc: 'Title for published article'},
         status: {type: Select, options: 'Visible,Hidden', defaultValue: 'Hidden'},
-        language: {type:Select, options: ['English','Francais', 'Deutsch'], defaultValue: 'English'},
+        language: {type: Select, options: ['English', 'Francais', 'Deutsch'], defaultValue: 'English'},
         translations: {type: Relationship, ref: 'Article', many: true},
         text: {type: Wysiwyg},
 
@@ -184,6 +189,8 @@ keystone.createList('Proposal', {
 
 keystone.createList('Image', {
     schemaDoc: 'Image for Article',
+    labelResolver: item => item.file.originalFilename,
+
     fields: {
         file: {type: File, adapter: imageFileAdapter},
 
