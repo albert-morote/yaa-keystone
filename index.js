@@ -36,7 +36,13 @@ const imageFileAdapter = new LocalFileAdapter({
 const keystone = new Keystone({
     name: PROJECT_NAME,
     adapter: new MongooseAdapter({dbName: 'keystone-db'}),
+
 });
+
+keystone.prepare({
+   cors:{origin:true,credentials:true}
+});
+
 
 const authStrategy = keystone.createAuthStrategy({
     type: PasswordAuthStrategy,
@@ -107,8 +113,27 @@ keystone.createList('User', {
 
 keystone.createList('YouTube', {
     schemaDoc: 'YouTube embeds',
+    labelResolver: item => {
+        console.log(item)
+        return item.youtube.title
+    },
+
     fields: {
         youtube: {type: OEmbed, adapter: iframelyAdapter},
+    }
+
+})
+
+
+keystone.createList('Podcast', {
+    schemaDoc: 'Podcast embeds',
+    labelResolver: item => {
+        console.log(item)
+        return item.spotify.title
+    },
+
+    fields: {
+        spotify: {type: OEmbed, adapter: iframelyAdapter},
     }
 
 })
@@ -126,12 +151,13 @@ keystone.createList('Article', {
     fields: {
         title: {type: Text, schemaDoc: 'Title for published article'},
         status: {type: Select, options: 'Visible,Hidden', defaultValue: 'Hidden'},
-        language: {type:Select, options: 'English,Deutsch,Francais', defaultValue: 'English'},
+        language: {type: Select, options: ['English', 'Francais', 'Deutsch'], defaultValue: 'English'},
         translations: {type: Relationship, ref: 'Article', many: true},
         text: {type: Wysiwyg},
 
         images: {type: Relationship, ref: 'Image', many: true},
         video: {type: Relationship, ref: 'YouTube', many: true},
+        podcast: {type: Relationship, ref: 'Podcast', many: true},
         proposal: {
             isUnique: false,
             type: Relationship,
@@ -184,6 +210,8 @@ keystone.createList('Proposal', {
 
 keystone.createList('Image', {
     schemaDoc: 'Image for Article',
+    labelResolver: item => item.file.originalFilename,
+
     fields: {
         file: {type: File, adapter: imageFileAdapter},
 
