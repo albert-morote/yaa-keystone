@@ -7,6 +7,7 @@ const query = `query {
 
 export default  async () => {
     const port = process.env.REACT_APP_PORT;
+    const host = process.env.HOST
 
     try {
        const res = await axios({

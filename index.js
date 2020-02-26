@@ -36,7 +36,13 @@ const imageFileAdapter = new LocalFileAdapter({
 const keystone = new Keystone({
     name: PROJECT_NAME,
     adapter: new MongooseAdapter({dbName: 'keystone-db'}),
+
 });
+
+keystone.prepare({
+   cors:{origin:true,credentials:true}
+});
+
 
 const authStrategy = keystone.createAuthStrategy({
     type: PasswordAuthStrategy,
