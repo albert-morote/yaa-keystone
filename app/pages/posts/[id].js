@@ -84,6 +84,7 @@ Post.getInitialProps = async ctx => {
         return {data}
     } catch (error) {
         console.log(`error ${error.toString()}`)
+        console.log(error)
         return {data: {}}
     }
 }
