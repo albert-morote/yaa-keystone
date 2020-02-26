@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/keystone-blank.iml" filepath="$PROJECT_DIR$/.idea/keystone-blank.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../sandbox/keystone-blank/.idea/keystone-blank.iml" filepath="$PROJECT_DIR$/../../sandbox/keystone-blank/.idea/keystone-blank.iml" />
     </modules>
   </component>
 </project>
