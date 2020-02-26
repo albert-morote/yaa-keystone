@@ -40,7 +40,7 @@ width:50%;
 
 .article_main {
   background: rgba(255, 255, 255, 0.3);
-  width: 50%;
+  width: 95%;
   position: relative;
   padding: 10px;
 
@@ -51,7 +51,15 @@ width:50%;
 
   .article_content {
     padding: 10px;
+    display:flex;
+  h3 {
+    color: #ff52f5;
+    &.article_content_comments {
+      color:yellow;
+    }
   }
+  }
+
 
   .article_embed {
     max-width: 40%;

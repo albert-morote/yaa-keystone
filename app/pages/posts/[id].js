@@ -17,7 +17,7 @@ const ARTICLE_QUERY = gql`
       }
     }
     podcast {
-      youtube {
+      spotify {
         ... on OEmbedRich {
           html
         }
@@ -37,34 +37,46 @@ const Post = props => {
     useScript('https://cdn.commento.io/js/commento.js')
     const {data} = props
     const article = data?.data?.Article
-    console.log("article")
-    console.log(article)
 
     const videos = article?.video
-   // const podcasts = article?.podcast
+    const podcasts = article?.podcast
     return (
         <div className='article_main'>
-            <h1>Article</h1>
-<div className='article_content'>
+            <div className='article_content'>
+                <div className='article_content_text'>
+                    <h1>{article?.title}</h1>
 
-            <h1>{article?.title}</h1>
-            {(article?.text) && <div dangerouslySetInnerHTML={{__html: article.text}}></div>}
-            <div id="commento"></div>
-            {article?.images.map(image => <img src={`/images/${image.file.filename}`}/>)}
-            {videos && videos.map(podcast =>
-                (podcast?.spotify?.html) && <div className='article_embed' dangerouslySetInnerHTML={{__html: podcast.spotify.html}}></div>
-            )}
-          {/*  {podcasts && podcasts.map(video =>
-                (video?.youtube?.html) && <div className='article_embed' dangerouslySetInnerHTML={{__html: video.youtube.html}}></div>
-            )}*/}
-</div>
+                    {(article?.text) && <div dangerouslySetInnerHTML={{__html: article.text}}></div>}
+                 <h3 className='article_content_comments'>Comments</h3>
+
+                    <div id="commento"></div>
+
+                </div>
+                <div className='article_content_media'>
+                    {article?.images.map(image => <img src={`/images/${image.file.filename}`}/>)}
+                    {videos && <h3>Videos</h3>}
+                    {videos?.map(video =>
+                        (video?.youtube?.html) &&
+                        <div className='article_embed' dangerouslySetInnerHTML={{__html: video.youtube.html}}></div>
+                    )}
+                    {videos && <h3>Podcasts</h3>}
+
+                    {podcasts?.map(podcast => {
+                            return (podcast?.spotify?.html) &&
+                                <div className='article_embed'
+                                     dangerouslySetInnerHTML={{__html: podcast.spotify.html}}></div>
+                        }
+                    )}
+                </div>
+
+            </div>
+
         </div>
     );
 };
 
 Post.getInitialProps = async ctx => {
 
-    console.log('post gip')
     const apolloClient = ctx.apolloClient;
     try {
         const {id} = ctx.query
