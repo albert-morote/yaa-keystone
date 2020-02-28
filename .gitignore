@@ -147,7 +147,7 @@ temp/
 # User-specific stuff
 _deprecated
 .deprecated/*
-.idea/keystone-blank.iml
+.idea/keystone-blank-client.iml
 .idea
 .idea/*
 .idea/**
