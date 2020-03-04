@@ -19,7 +19,7 @@ const iframelyAdapter = new IframelyOEmbedAdapter({
 	apiKey: process.env.IFRAMELY_KEY
 });
 
-const staticPath = 'app/public';
+const staticPath = 'public';
 const staticRoute = '';
 const imageFileAdapter = new LocalFileAdapter({
 	src: `${staticPath}/images`,
@@ -60,7 +60,7 @@ module.exports = {
 		new GraphQLApp(),
 		new AdminUIApp({
 			adminPath: '/admin',
-			hooks: require.resolve('../admin/'),
+			hooks: require.resolve('./admin/'),
 			authStrategy,
 			enableDefaultRoute: true
 		}),

@@ -16,6 +16,7 @@
     "isolatedModules": true,
     "sourceMap": true,
     "alwaysStrict": true,
+    "jsx": "react"
   },
   "exclude": [
     "node_modules"

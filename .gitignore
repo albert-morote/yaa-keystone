@@ -145,6 +145,9 @@ temp/
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff
+tsout
+tsout/**
+tsout/**/admin
 _deprecated
 .deprecated/*
 .idea/keystone-blank-client.iml
