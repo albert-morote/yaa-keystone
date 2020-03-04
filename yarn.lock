@@ -5831,7 +5831,7 @@ dot-prop@^5.0.0:
   dependencies:
     is-obj "^2.0.0"
 
-dotenv@^8.0.0:
+dotenv@^8.2.0:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
   integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
@@ -5986,11 +5986,6 @@ error-ex@^1.2.0, error-ex@^1.3.1:
   integrity sha512-7dFHNmqeFSEt2ZBsCriorKnn3Z2pj+fd9kmI6QoWw4//DL+icEBfc0U7qJCisqrTsKTjw4fNFy2pW9OqStD84g==
   dependencies:
     is-arrayish "^0.2.1"
-
-eruda@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/eruda/-/eruda-2.2.0.tgz#6d2b629a5d54e780c6fbbae472f62174aa78d228"
-  integrity sha512-mxr/GVPv3HN0GBMkxjjcttISvreKHycxJMOOsGJVb8SDQ3k2/eUme4VBgymURJSsbSuG7fleFDk/IfulsL8uSA==
 
 es-abstract@^1.17.0-next.1, es-abstract@^1.17.2:
   version "1.17.4"
